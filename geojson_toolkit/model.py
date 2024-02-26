@@ -1,0 +1,3 @@
+class FeatureCollectionMetaclass():
+
+class FeatureCollectionExplicitPrecision()

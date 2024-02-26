@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "geojson-toolkit"
+version = "0.1.0"
+description = "an interactive cli/library toolkit to interact with geojson via cli, primary for optimization, mapbox-prefer format"
+authors = ["Nutchanon Ninyawee <nutchanon@codustry.com>"]
+license = "ISC"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+orjson = "^3.9.14"
+geojson-pydantic = "^1.0.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
