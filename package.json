@@ -1,0 +1,42 @@
+{
+  "name": "@codustry/geojson-toolkit",
+  "version": "0.0.2",
+  "description": "an interactive cli/library toolkit to interact with geojson via cli, primary for optimization, mapbox-prefer format",
+  "main": "./dist/index.js",
+  "files": [
+    "./dist/**/*"
+  ],
+  "bin": {
+    "geojson-toolkit": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "npx tsc -b ./tsconfig.json",
+    "cmd": "ts-node ./src/index.ts",
+    "run": "node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wasdee/geojson-toolkit.git"
+  },
+  "keywords": [
+    "geojson"
+  ],
+  "author": "Nutchanon Ninyawee <nutchanon@codustry.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wasdee/geojson-toolkit/issues"
+  },
+  "homepage": "https://github.com/wasdee/geojson-toolkit#readme",
+  "dependencies": {
+    "@mapbox/geojsonhint": "^3.3.0",
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.5.8",
+    "@types/node": "^20.11.20",
+    "@types/geojson": "^7946.0.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
