@@ -35,8 +35,6 @@ program
     "-I, --splitIndex",
     "Apply index properties when splitting properties file."
   )
-  .option("-C, --compress", "Compress by gzip.")
-  .option("-O, --out <path>", "Output file path.")
   .showHelpAfterError();
 
 program.action(actionRunner(action));

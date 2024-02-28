@@ -5,38 +5,38 @@ import { type OptionValues } from "commander";
 import type { FeatureCollection, Geometry } from "geojson";
 import { reducePrecision } from "./precision";
 
-export const action = async (geojson: string, options: OptionValues) => {
-  console.log("geojson", geojson);
-  console.log("options", options);
+export const action = async (geoJsonInput: string, options: OptionValues) => {
+  console.log("input:", geoJsonInput);
+  console.log("options:", options);
 
   const precision: number | undefined = options.precision;
-  const extraPrecision: number | undefined = options.extraPrecision;
+  const extraPrecision: number = options.extraPrecision || precision;
   const isSplit: boolean = options.split || false;
   const splitIndex: boolean = options.splitIndex || false;
-  const isCompress: boolean = options.compress || false; // TODO: add compress action
-  let out: string | undefined = options.out;
-  if (!out) {
-    out = "out.geojson";
-  }
+  const out = geoJsonInput.replace(
+    path.extname(geoJsonInput),
+    `.p${precision}e${extraPrecision}.geojson`
+  );
+  const precisionOut = out.replace(path.extname(out), ".properties.geojson");
 
-  let geoJSON: FeatureCollection<Geometry | null> = JSON.parse(
-    fs.readFileSync(geojson, "utf-8")
+  let geoJson: FeatureCollection<Geometry | null> = JSON.parse(
+    fs.readFileSync(geoJsonInput, "utf-8")
   );
 
   // validate geojson
-  const errors = geojsonhint.hint(geoJSON);
+  const errors = geojsonhint.hint(geoJson);
   if (errors.length > 0) {
     throw new Error("GeoJSON errors: " + errors);
   }
 
-  const geoJsonProperties = structuredClone(geoJSON);
+  const geoJsonProperties = structuredClone(geoJson);
 
-  geoJSON.features.map((feature, index) => {
+  geoJson.features.map((feature, index) => {
     if (precision && feature.geometry) {
       feature.geometry = reducePrecision(
         feature.geometry,
         precision,
-        extraPrecision || precision
+        extraPrecision
       );
     }
 
@@ -60,12 +60,10 @@ export const action = async (geojson: string, options: OptionValues) => {
     }
   });
 
-  fs.writeFileSync(out, JSON.stringify(geoJSON));
+  fs.writeFileSync(out, JSON.stringify(geoJson));
   console.log("created", out);
 
   if (isSplit) {
-    const precisionOut = out.replace(path.extname(out), ".properties.geojson");
-
     fs.writeFileSync(precisionOut, JSON.stringify(geoJsonProperties));
     console.log("created", precisionOut);
   }
