@@ -2,6 +2,8 @@
 
 an interactive cli/library toolkit to interact with geojson via cli, primary for optimization, mapbox-prefer format
 
+![cover](assets/cover.webp)
+
 ## rationale
 
 - reduce size 50% by removing precision from 15 to 6 in some polygon geojson.
