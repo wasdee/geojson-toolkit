@@ -7,7 +7,7 @@
     "./dist/**/*"
   ],
   "bin": {
-    "geojson-toolkit": "./dist/index.js"
+    "geojson-toolkit": "dist/index.js"
   },
   "scripts": {
     "build": "npx tsc -b ./tsconfig.json",
