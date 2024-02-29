@@ -28,6 +28,12 @@ given `input.geojson`
 npm i -g @codustry/geojson-toolkit
 
 geojson-toolkit [options] <geojson>
+
+# example
+geojson-toolkit -P 6 -S -I input.geojson
+
+# apply to all geojson files in a directory
+fd -e geojson -x geojson-toolkit -P 6 -S -I 
 ```
 
 ## Arguments
