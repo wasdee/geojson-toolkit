@@ -42,12 +42,15 @@ fd -e geojson -x geojson-toolkit -P 6 -S -I
 
 ## Options
 
-- `-V, --version`: output the version number
-- `-P, --precision <precision>`: Set the precision of coordinates.
-- `-E, --extraPrecision <precision>`: Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation].
-- `-S, --split`: Split properties to properties file and remove properties from geojson.
-- `-I, --splitIndex`: Apply index properties when splitting properties file.
-- `-h, --help`: display help for command
+| Option                      | Description                                                                 | Default Value |
+| --------------------------- | --------------------------------------------------------------------------- | ------------- |
+| `-P, --precision <precision>` | Set the precision of coordinates                                           |               |
+| `-E, --extraPrecision <precision>` | Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation] |               |
+| `-S, --split`               | Split properties to properties file and remove properties from geojson       |               |
+| `-I, --splitIndex`          | Apply index properties when splitting properties file                       |               |
+| `-V, --version`             | Output the version number                                                   |               |
+| `-h, --help`                | Display help for command                                                    |               |
+
 
 ## other tools
 
