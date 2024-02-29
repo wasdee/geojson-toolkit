@@ -10,7 +10,7 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
   console.log("options:", options);
 
   const precision: number | undefined = options.precision;
-  const extraPrecision: number = options.extraPrecision || precision;
+  const extraPrecision: number = options.extraPrecision || 2;
   const isSplit: boolean = options.split || false;
   const splitIndex: boolean = options.splitIndex || false;
   const out = precision
