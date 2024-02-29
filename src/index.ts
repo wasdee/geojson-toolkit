@@ -18,22 +18,22 @@ program
   )
   .argument("<geojson>", "GeoJSON input file.")
   .option(
-    "-P, --precision <precision>",
-    "Set the precision of coordinates.",
+    "-p, --precision <precision>",
+    "Set the precision of coordinates. Default is 6.",
     validateInt
   )
   .option(
-    "-E, --extraPrecision <precision>",
-    "Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation].",
+    "-e, --extraPrecision <precision>",
+    "Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation]. Default is 2.",
     validateInt
   )
   .option(
-    "-S, --split",
+    "-P, --propertySplit",
     "Split properties to properties file and remove properties from geojson."
   )
   .option(
-    "-I, --splitIndex",
-    "Apply index properties when splitting properties file."
+    "-i, --index",
+    "add `index` to properties and geom file for flutter mapbox SDK.  Default is true."
   )
   .showHelpAfterError();
 

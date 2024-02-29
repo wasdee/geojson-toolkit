@@ -9,17 +9,18 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
   console.log("input:", geoJsonInput);
   console.log("options:", options);
 
-  const precision: number | undefined = options.precision;
+  const precision: number = options.precision || 6;
   const extraPrecision: number = options.extraPrecision || 2;
-  const isSplit: boolean = options.split || false;
-  const splitIndex: boolean = options.splitIndex || false;
-  const out = precision
+  const propertySplit: boolean = options.split || true;
+  const addIndex: boolean = options.splitIndex || true;
+  const allOut = precision
     ? geoJsonInput.replace(
         path.extname(geoJsonInput),
         `.p${precision}e${extraPrecision}.geojson`
       )
     : geoJsonInput;
-  const precisionOut = out.replace(path.extname(out), ".properties.geojson");
+  const geometryOut = allOut.replace(path.extname(allOut), "geom.geojson");
+  const precisionOut = allOut.replace(path.extname(allOut), ".properties.geojson");
 
   let geoJson: FeatureCollection<Geometry | null> = JSON.parse(
     fs.readFileSync(geoJsonInput, "utf-8")
@@ -31,7 +32,9 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
     throw new Error("GeoJSON errors: " + errors);
   }
 
-  const geoJsonProperties = structuredClone(geoJson);
+  const geoJsonGeometryOnly = structuredClone(geoJson);
+  const geoJsonPropertyOnly = structuredClone(geoJson);
+
 
   geoJson.features.map((feature, index) => {
     if (precision && feature.geometry) {
@@ -42,31 +45,42 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
       );
     }
 
-    if (isSplit) {
-      geoJsonProperties.features[index].geometry = null;
+    if (propertySplit) {
+      geoJsonPropertyOnly.features[index].geometry = null;
 
-      if (splitIndex) {
-        geoJsonProperties.features[index].properties = Object.assign(
+      geoJsonGeometryOnly.features[index].properties = Object.assign(
+        {
+          index: index,
+        },
+        feature.properties
+      );
+
+      if (addIndex) {
+        geoJsonPropertyOnly.features[index].properties = Object.assign(
           {
             index: index,
           },
           feature.properties
         );
+
         feature.properties = {
           index: index,
         };
       } else {
-        geoJsonProperties.features[index].properties = feature.properties;
-        feature.properties = {};
+        geoJsonPropertyOnly.features[index].properties = feature.properties;
+        geoJsonGeometryOnly.features[index].properties = {};
       }
     }
   });
 
-  fs.writeFileSync(out, JSON.stringify(geoJson));
-  console.log("created", out);
+  fs.writeFileSync(allOut, JSON.stringify(geoJson));
+  console.log("created", allOut);
 
-  if (isSplit) {
-    fs.writeFileSync(precisionOut, JSON.stringify(geoJsonProperties));
+  fs.writeFileSync(geometryOut, JSON.stringify(geoJsonGeometryOnly));
+  console.log("created", geometryOut);
+
+  if (propertySplit) {
+    fs.writeFileSync(precisionOut, JSON.stringify(geoJsonPropertyOnly));
     console.log("created", precisionOut);
   }
 };
