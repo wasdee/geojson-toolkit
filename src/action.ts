@@ -48,12 +48,12 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
       if (splitIndex) {
         geoJsonProperties.features[index].properties = Object.assign(
           {
-            idx: index,
+            index: index,
           },
           feature.properties
         );
         feature.properties = {
-          idx: index,
+          index: index,
         };
       } else {
         geoJsonProperties.features[index].properties = feature.properties;
