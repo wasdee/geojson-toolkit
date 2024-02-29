@@ -18,7 +18,7 @@ given `input.geojson`
 
 | operation                                 | description                         | file_example_name                                     |
 | ----------------------------------------- | ----------------------------------- | ----------------------------------------------------- |
-| reduce precision to 6 precision or ~10 cm | reduce the precision of coordinates | `input.p6e2.geojson`                                  |
+| reduce precision  | reduce the precision of coordinates | `input.p6e2.geojson`                                  |
 | split properties                          | split properties that are not used. | `input.p6e2.geojson`, `input.p6e2.properties.geojson` |
 | add index                                 | add index property to each feature  | `input.p6e2.geojson`                                  |
 
@@ -44,8 +44,8 @@ fd -e geojson -x geojson-toolkit -P 6 -S -I
 
 | Option                      | Description                                                                 | Default Value |
 | --------------------------- | --------------------------------------------------------------------------- | ------------- |
-| `-p, --precision <precision>` | Set the precision of coordinates. Default is 6.                                           | 6             |
-| `-e, --extraPrecision <precision>` | Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation]. Default is 2. | 2             |
+| `-p, --precision <precision>` | Set the precision of coordinates.(default is 6 precision or ~10 cm)      | 6             |
+| `-e, --extraPrecision <precision>` | Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation].  (default is 2 precisions ~ 1 cm if in meter unit.) | 2             |
 | `-P, --propertySplit`               | Split properties to properties file and remove properties from geojson       |  true             |
 | `-i, --index`          | add `index` to properties and geom file for flutter mapbox SDK.  Default is true.                       | true          |
 | `-V, --version`             | Output the version number                                                   |               |
