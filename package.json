@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wasdee/geojson-toolkit.git"
+    "url": "git+https://github.com/codustry/geojson-toolkit.git"
   },
   "keywords": [
     "geojson"
@@ -24,9 +24,9 @@
   "author": "Nutchanon Ninyawee <nutchanon@codustry.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wasdee/geojson-toolkit/issues"
+    "url": "https://github.com/codustry/geojson-toolkit/issues"
   },
-  "homepage": "https://github.com/wasdee/geojson-toolkit#readme",
+  "homepage": "https://github.com/codustry/geojson-toolkit#readme",
   "dependencies": {
     "@mapbox/geojsonhint": "^3.3.0",
     "commander": "^12.0.0",
