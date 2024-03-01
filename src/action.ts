@@ -37,7 +37,7 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
 
 
   geoJson.features.map((feature, index) => {
-    if (precision && feature.geometry) {
+    if (feature.geometry) {
       feature.geometry = reducePrecision(
         feature.geometry,
         precision,
@@ -45,16 +45,11 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
       );
       geoJsonGeometryOnly.features[index].geometry = feature.geometry;
     }
+    geoJsonGeometryOnly.features[index].properties = {};
+
 
     if (propertySplit) {
       geoJsonPropertyOnly.features[index].geometry = null;
-
-      geoJsonGeometryOnly.features[index].properties = Object.assign(
-        {
-          index: index,
-        },
-        feature.properties
-      );
 
       if (addIndex) {
         geoJsonPropertyOnly.features[index].properties = Object.assign(
@@ -64,12 +59,16 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
           feature.properties
         );
 
+        geoJsonGeometryOnly.features[index].properties = {
+            index: index,
+        }
+
         feature.properties = {
           index: index,
         };
+
       } else {
         geoJsonPropertyOnly.features[index].properties = feature.properties;
-        geoJsonGeometryOnly.features[index].properties = {};
       }
     }
   });
