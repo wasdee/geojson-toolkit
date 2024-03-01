@@ -30,10 +30,16 @@ npm i -g @codustry/geojson-toolkit
 geojson-toolkit [options] <geojson>
 
 # example
-geojson-toolkit -P 6 -S -I input.geojson
+geojson-toolkit input.geojson
+
+# remove all existings
+fd 'p\de\d' -x rm
 
 # apply to all geojson files in a directory
-fd -e geojson -x geojson-toolkit -P 6 -S -I 
+fd -e geojson -x geojson-toolkit 
+
+# compress all geojson files in a directory
+fd . -t file  -x gzip -9 -k 
 ```
 
 ## Arguments
