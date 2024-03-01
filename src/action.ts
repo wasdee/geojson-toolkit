@@ -52,7 +52,7 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
       geoJsonPropertyOnly.features[index].geometry = null;
 
       if (addIndex) {
-        geoJsonPropertyOnly.features[index].properties = Object.assign(
+        feature.properties = geoJsonPropertyOnly.features[index].properties = Object.assign(
           {
             index: index,
           },
@@ -62,10 +62,6 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
         geoJsonGeometryOnly.features[index].properties = {
             index: index,
         }
-
-        feature.properties = {
-          index: index,
-        };
 
       } else {
         geoJsonPropertyOnly.features[index].properties = feature.properties;
