@@ -32,8 +32,8 @@ program
     "Split properties to properties file and remove properties from geojson."
   )
   .option(
-    "-i, --index",
-    "add `index` to properties and geom file for flutter mapbox SDK.  Default is true."
+    "-i, --noIndex",
+    "remove `index` to properties and geom file for flutter mapbox SDK.  Default is false."
   )
   .showHelpAfterError();
 

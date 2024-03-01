@@ -12,14 +12,14 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
   const precision: number = options.precision || 6;
   const extraPrecision: number = options.extraPrecision || 2;
   const propertySplit: boolean = options.split || true;
-  const addIndex: boolean = options.splitIndex || true;
+  const addIndex: boolean = !options.splitIndex || true;
   const allOut = precision
     ? geoJsonInput.replace(
         path.extname(geoJsonInput),
         `.p${precision}e${extraPrecision}.geojson`
       )
     : geoJsonInput;
-  const geometryOut = allOut.replace(path.extname(allOut), "geom.geojson");
+  const geometryOut = allOut.replace(path.extname(allOut), ".geom.geojson");
   const precisionOut = allOut.replace(path.extname(allOut), ".properties.geojson");
 
   let geoJson: FeatureCollection<Geometry | null> = JSON.parse(
@@ -43,6 +43,7 @@ export const action = async (geoJsonInput: string, options: OptionValues) => {
         precision,
         extraPrecision
       );
+      geoJsonGeometryOnly.features[index].geometry = feature.geometry;
     }
 
     if (propertySplit) {

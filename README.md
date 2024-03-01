@@ -47,7 +47,7 @@ fd -e geojson -x geojson-toolkit -P 6 -S -I
 | `-p, --precision <precision>` | Set the precision of coordinates.(default is 6 precision or ~10 cm)      | 6             |
 | `-e, --extraPrecision <precision>` | Set the extra precision for things like the z value when the coordinate is [longitude, latitude, elevation].  (default is 2 precisions ~ 1 cm if in meter unit.) | 2             |
 | `-P, --propertySplit`               | Split properties to properties file and remove properties from geojson       |  true             |
-| `-i, --index`          | add `index` to properties and geom file for flutter mapbox SDK.  Default is true.                       | true          |
+| `-i, --noIndex`          | add `index` to properties and geom file for flutter mapbox SDK.  Default is true.                       | true          |
 | `-V, --version`             | Output the version number                                                   |               |
 | `-h, --help`                | Display help for command                                                    |               |
 
