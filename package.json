@@ -1,6 +1,6 @@
 {
   "name": "@codustry/geojson-toolkit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "an interactive cli/library toolkit to interact with geojson via cli, primary for optimization, mapbox-prefer format",
   "main": "./dist/index.js",
   "files": [
